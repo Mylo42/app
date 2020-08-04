@@ -30,7 +30,7 @@ def count_words():
         colour = colour[-(len(colour) - 2):]
         while len(colour) < 6:
             colour = "0" + colour
-        html = html + "<span style=font-size: %s; color: #%s>%s</span>"
+        html = html + "<span style=\"font-size: %s; color: #%s\">%s</span>" % (size, colour, word)
     html = html + "</body></html>"
     return html
 if __name__ == "__main__":
