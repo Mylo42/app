@@ -5,15 +5,26 @@ from nltk import FreqDist
 nltk.download('gutenberg')
 from nltk.corpus import gutenberg 
 
+
+nltk.download('stopwords')
+from nltk.corpus import stopwords
+
 from flask import Flask
 app = Flask(__name__)
 
 @app.route("/")
 def count_words():
+    # Define the stopword set
+    stopWords = set(stopwords.words('english'))
+
+
+    # Grab Sense and Sensibility; tokenize; filter stop words;
+    # get frequency distribution
     tokens = gutenberg.words('austen-sense.txt')
     tokens = [word.lower() for word in tokens if word.isalpha()]
-
+    tokens = [word for word in tokens if word not in stopWords]
     fdist = FreqDist(tokens)
+
     common = fdist.most_common(500)
 
     words = []
@@ -25,6 +36,7 @@ def count_words():
     html = "<html><head><title>CAB432_exercise_3</title></head><body><h1>Exercise 3</h1>"
     
     for word in words:
+
         size = str(int(15 + fdist[word] / float(highCount) * 150))
         colour = str(hex(int(0.8 * fdist[word] / float(highCount) * 256**3)))
         colour = colour[-(len(colour) - 2):]
@@ -35,4 +47,3 @@ def count_words():
     return html
 if __name__ == "__main__":
     app.run()
-
