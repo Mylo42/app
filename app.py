@@ -33,7 +33,7 @@ def count_words():
     words.sort()
 
     highCount = common[0][1]
-    html = "<html><head><title>CAB432_exercise_3</title></head><body><h1>Exercise 3</h1>"
+    html = "<html><head><title>CAB432_exercise_3</title></head><body style = word-wrap:break-word><h1>Exercise 3</h1>"
     
     for word in words:
 
